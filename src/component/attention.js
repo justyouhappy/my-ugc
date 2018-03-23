@@ -11,16 +11,10 @@ export default class Main extends React.Component {
         showsHorizontalScrollIndicator={false}
       >
         <Text >你的第一个app成功了</Text>
-        <View style={styles.block}></View>
       </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    block: {
-        height: 10000,
-        width: 100,
-        backgroundColor: 'red',
-    }
 });

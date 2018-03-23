@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,StatusBar, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Main from './main.js';
 import Mine from './mine.js';
@@ -8,6 +8,7 @@ import MyWrite from './myWrite.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import { StackNavigator } from 'react-navigation';
+import StatusBar from '../component/statusBar.js'
 
 export default class Nav extends React.Component {
   constructor(props){
@@ -24,7 +25,7 @@ export default class Nav extends React.Component {
       <SafeAreaView style={styles.container} >
             <StatusBar
               barStyle="dark-content"
-              backgroundColor="#eefef1"
+              backgroundColor="#fff"
             />
             <TabNavigator
               tabBarStyle={styles.bar}

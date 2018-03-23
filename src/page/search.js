@@ -29,7 +29,6 @@ export default class Main extends React.Component {
           showsHorizontalScrollIndicator={false}
         >
           <Text>{this.state.string}</Text>
-          <View style={styles.block}></View>
         </ScrollView>
       </View>
     );
@@ -47,10 +46,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
-  },
-  block: {
-    height: 10000,
-    width: '100%',
-    backgroundColor: 'red',
-}
+  }
 });

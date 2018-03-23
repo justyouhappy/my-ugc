@@ -1,20 +1,17 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text, StatusBar, View, Button } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-
+import TitleRight from '../component/titleRight.js';
 export default class Post extends React.Component {
   static navigationOptions = {
-    headerTitle: '投稿',
+    title: '投稿',
     headerRight: (
-        <Text
-            onPress={() => alert('This is a button!')}
-        >Info</Text>
+        <TitleRight onClick={() => alert('This is a button!')} title="发表"></TitleRight>
     ),
-    titleStyle: {
-        textAlign: 'center',
-        color: '#000',
-        justifyContent: 'space-between'
-    },
+    headerTitleStyle:{textAlign:'center',alignSelf:'center', flex: 1},
+    headerStyle:{ 
+        backgroundColor:'yellow',
+    } 
   };
   render() {
     return (

@@ -6,7 +6,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>你的第四个app成功了</Text>
+        <Text>你的第四个ap成功了</Text>
       </View>
     );
   }

@@ -9,21 +9,13 @@ const Navigator = StackNavigator({
     Post: { screen: Post },
 }, {
     initialRouteName: 'Home',
-     swipeEnabled: true,
-     animationEnabled: true,
-     lazy: false,
-     tabBarPosition:'bottom',
-     mode: 'modal'
+    mode: 'modal'
 });  
 export default class App extends React.Component {
     render() {
       return (
         <View style={styles.container}>
-            <Navigator
-                navigationOptions={{
-                    title: 'Home',
-                }}
-            />
+            <Navigator/>
         </View>
       );
     }
