@@ -1,24 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View,} from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 
 export default class Main extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView 
+        horizontal={false}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+      >
         <Text >你的第一个app成功了</Text>
         <View style={styles.block}></View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     block: {
-        height: 100,
+        height: 10000,
         width: 100,
         backgroundColor: 'red',
     }
