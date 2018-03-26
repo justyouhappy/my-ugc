@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import fetchData from '../lib/fetchdata.js';
-import Search from 'react-native-search-box';
+import { SearchBar } from 'react-native-elements';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -14,15 +14,24 @@ export default class Main extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Search
-          ref="searchBox" 
-          searchIconCollapsedMargin={70}
-          placeholderCollapsedMargin={50}
-          placeholder="搜索你想关注的人"
-          backgroundColor="#555"
-          onSearch={this.search.bind(this)}
-          afterDelete={this.afterDelete.bind(this)}
-        />
+      <SearchBar
+        platform="ios"
+        noIcon={true}
+        containerStyle={{
+          backgroundColor: '#eee',
+          borderColor: '#ccc',
+          height: 60,
+        }}
+        inputStyle={{
+          backgroundColor: '#fff',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        lightTheme={true}
+        placeholder='搜索你想关注的人'
+        onSubmitEditing={this.search.bind(this)}
+      />
         <ScrollView 
           horizontal={false}
           pagingEnabled={true}
@@ -33,12 +42,10 @@ export default class Main extends React.Component {
       </View>
     );
   }
-  search(str) {
+  search(event) {
     this.setState({
-      string: str + ''
+      string: event.nativeEvent.text,
     })
-  }
-  afterDelete() {
   }
 }
 

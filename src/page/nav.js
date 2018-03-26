@@ -9,17 +9,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import { StackNavigator } from 'react-navigation';
 import StatusBar from '../component/statusBar.js'
+import fetchData from '../lib/fetchdata.js';
 
 export default class Nav extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      selectedTab:'Main'
+      selectedTab:'Main',
+      isSigined: false,
     }
   }
   static navigationOptions = {
     header: null
   };
+  openPost() {
+    // alert(this.props.navigation.state.params.isSigined)
+    if(this.state.isSigined) {
+      this.props.navigation.navigate('Post');
+    } else {
+      this.props.navigation.navigate('Sigin');
+    }
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container} >
@@ -52,7 +63,7 @@ export default class Nav extends React.Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投稿"
-                    onPress={() => {this.props.navigation.navigate('Post')}}
+                    onPress={this.openPost.bind(this)}
                     titleStyle={styles.tabText}
                     renderIcon={() => <Icon name={ 'ios-add-circle' } size={30} color={'#f54e7a'} />}
                 >
@@ -81,6 +92,17 @@ export default class Nav extends React.Component {
             </TabNavigator>
         </SafeAreaView>
     );
+  }
+  componentDidMount() {
+    fetchData('http://10.1.8.95:3000/').then((res) => {
+      this.setState({
+        isSigined: true,
+      })
+    }).catch((res) => {
+        this.setState({
+            isSigined: false,
+        })
+    })
   }
 }
 
