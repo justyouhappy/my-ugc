@@ -10,7 +10,6 @@ export default class Post extends React.Component {
     ),
     headerTitleStyle:{textAlign:'center',alignSelf:'center', flex: 1},
     headerStyle:{ 
-        backgroundColor:'yellow',
     } 
   };
   render() {

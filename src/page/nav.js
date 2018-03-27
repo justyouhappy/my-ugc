@@ -10,7 +10,7 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import { StackNavigator } from 'react-navigation';
 import StatusBar from '../component/statusBar.js'
 import fetchData from '../lib/fetchdata.js';
-
+import config from '../lib/config.js';
 export default class Nav extends React.Component {
   constructor(props){
     super(props);
@@ -18,6 +18,7 @@ export default class Nav extends React.Component {
       selectedTab:'Main',
       isSigined: false,
     }
+    this.changeSigined = this.changeSigined.bind(this);
   }
   static navigationOptions = {
     header: null
@@ -27,10 +28,31 @@ export default class Nav extends React.Component {
     if(this.state.isSigined) {
       this.props.navigation.navigate('Post');
     } else {
-      this.props.navigation.navigate('Sigin');
+      this.openSigin(() => {this.props.navigation.navigate('Post');});
     }
   }
-
+  openSigin(cb) {
+    this.props.navigation.navigate('Sigin', {changeSigined: this.changeSigined, cb});
+  }
+  openMain() {
+    if(!this.state.isSigined) {
+      this.openSigin(() => {this.setState({ selectedTab: '我的' });});
+    } else {
+      this.setState({ selectedTab: '我的' });
+    }
+  }
+  changeSigined(isSigined) {
+    this.setState({
+      isSigined,
+    })
+  }
+  openmyWrite() {
+    if(!this.state.isSigined) {
+      this.openSigin(() => {this.setState({ selectedTab: 'myWrite' });});
+    } else {
+      this.setState({ selectedTab: 'myWrite' });
+    }
+  }
   render() {
     return (
       <SafeAreaView style={styles.container} >
@@ -67,7 +89,6 @@ export default class Nav extends React.Component {
                     titleStyle={styles.tabText}
                     renderIcon={() => <Icon name={ 'ios-add-circle' } size={30} color={'#f54e7a'} />}
                 >
-                    <MyWrite />
                 </TabNavigator.Item> 
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '我的'}
@@ -76,8 +97,8 @@ export default class Nav extends React.Component {
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={() => <Icon name={ 'md-person' } size={30} color={'gray'} />}
                     renderSelectedIcon={() => <Icon name={ 'md-person' } size={30} color={'#555'} />}
-                    onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <Mine />
+                    onPress={this.openMain.bind(this)}>
+                    <Mine  isSigined={this.state.isSigined}/>
                 </TabNavigator.Item> 
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'myWrite'}
@@ -86,17 +107,17 @@ export default class Nav extends React.Component {
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={() => <Icons name={ 'event-note' } size={30} color={'gray'} />}
                     renderSelectedIcon={() => <Icons name={ 'event-note' } size={30} color={'#555'} />}
-                    onPress={() => this.setState({ selectedTab: 'myWrite' })}>
-                    <MyWrite />
+                    onPress={this.openmyWrite.bind(this)}>
+                    <MyWrite isSigined={this.state.isSigined} />
                 </TabNavigator.Item> 
             </TabNavigator>
         </SafeAreaView>
     );
   }
   componentDidMount() {
-    fetchData('http://10.1.8.95:3000/').then((res) => {
+    fetchData(`http://${config.ip}:3000/`).then((res) => {
       this.setState({
-        isSigined: true,
+        isSigined: false,
       })
     }).catch((res) => {
         this.setState({
