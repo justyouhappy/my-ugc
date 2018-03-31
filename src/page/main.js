@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Platform} from 'react-native';
 import { TabNavigator, TabBarTop } from 'react-navigation';
 import Recommend from '../component/recommend.js';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Attention from '../component/attention.js';
 
 const Tab = TabNavigator({

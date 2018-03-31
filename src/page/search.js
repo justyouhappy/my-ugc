@@ -17,9 +17,11 @@ export default class Main extends React.Component {
         <SearchBar
           platform="android"
           showLoading={false}
-          // icon={{ type: 'font-awesome', name: 'search' }}
+          icon={{ type: 'font-awesome', name: 'search',}}
           placeholder='搜索你想关注的人'
-          round={true}
+          inputStyle={{
+            marginLeft: 8
+          }}
           onSubmitEditing={this.search.bind(this)}
         />
         <ScrollView
