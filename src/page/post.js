@@ -31,11 +31,6 @@ export default class Post extends React.Component {
           barStyle="dark-content"
           backgroundColor="#ecf0f1"
         />
-<<<<<<< HEAD
-        <Text onPress={() => {
-            this.props.navigation.goBack()
-        }}>你的第四个app成功了</Text>
-=======
         <View style={styles.box}>
           <TextInput
             style={{ height: '50%', borderWidth: 0, fontSize: 20, textAlignVertical: 'top' }}
@@ -45,7 +40,6 @@ export default class Post extends React.Component {
             value={this.state.text}
           />
         </View>
->>>>>>> 原生rn
       </SafeAreaView>
     );
   }
@@ -53,13 +47,6 @@ export default class Post extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-<<<<<<< HEAD
-    backgroundColor: '#fff',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-=======
     backgroundColor: '#eee',
     flex: 1,
   },
@@ -68,5 +55,4 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   }
->>>>>>> 原生rn
 });
