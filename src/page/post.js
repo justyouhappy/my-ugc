@@ -77,6 +77,7 @@ export default class Post extends React.Component {
             style={{ height: '50%', borderWidth: 0, fontSize: 20, textAlignVertical: 'top' }}
             placeholder="分享你的原创...."
             multiline={true}
+            underlineColorAndroid="transparent"
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text}
           />
