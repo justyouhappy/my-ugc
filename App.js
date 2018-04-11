@@ -4,7 +4,8 @@ import Post from './src/page/post.js'
 import Sigin from './src/page/sigin.js'
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import config from './src/lib/config.js';
+window.config = config;
 const Navigator = StackNavigator({
     Home: { screen: Nav },
     Post: { screen: Post },

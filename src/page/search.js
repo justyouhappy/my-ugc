@@ -2,13 +2,24 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import fetchData from '../lib/fetchdata.js';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, ListItem, Avatar } from 'react-native-elements';
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      string: '123'
+      list: [
+        {
+          name: 'Amy Farha',
+          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
+          subtitle: 'Vice President'
+        },
+        {
+          name: 'Chris Jackson',
+          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
+          subtitle: 'Vice Chairman'
+        },
+      ],
     }
   }
   render() {
@@ -29,7 +40,17 @@ export default class Main extends React.Component {
           pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
         >
-          <Text>{this.state.string}</Text>
+        {
+          this.state.list.map((item, i) => (
+            <ListItem
+              key={i}
+              title={item.name}
+              subtitle={item.subtitle}
+              // rightIcon={{name:''}}
+              avatar={{ source: { uri: item.avatar_url } }}
+            />
+          ))
+        }
         </ScrollView>
       </View>
     );
@@ -43,7 +64,6 @@ export default class Main extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#cfcfcf',
     flex: 1,
   }
 });

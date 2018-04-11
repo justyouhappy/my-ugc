@@ -14,8 +14,8 @@ class Status extends Component {
       )
     } else if (Platform.OS === 'android') {
       return(
-        <View style = {{ height: StatusBar.currentHeight,backgroundColor: backgroundColor}}>
-          <StatusBar barStyle={barStyle} />
+        <View style = {{backgroundColor: backgroundColor}}>
+          <StatusBar barStyle={barStyle} backgroundColor={backgroundColor}/>
         </View>
       )
     }

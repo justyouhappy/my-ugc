@@ -58,7 +58,7 @@ export default class Nav extends React.Component {
       <SafeAreaView style={styles.container} >
             <StatusBar
               barStyle="dark-content"
-              backgroundColor="#fff"
+              backgroundColor="#ecf0f1"
             />
             <TabNavigator
               tabBarStyle={styles.bar}
