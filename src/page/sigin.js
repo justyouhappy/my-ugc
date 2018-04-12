@@ -19,6 +19,10 @@ export default class Post extends React.Component {
     this.props.navigation.goBack();
     params.cb();
   }
+  signUp() {
+    this.props.navigation.navigate('SignUp');
+
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -35,7 +39,7 @@ export default class Post extends React.Component {
                 color='black'
               />
             }
-            placeholder='输入用户名'
+            placeholder='输入用户名(电话)'
           />
           <Input
             containerStyle={{
@@ -74,6 +78,7 @@ export default class Post extends React.Component {
               borderWidth: 0,
               borderRadius: 5
             }}
+            onPress={this.signUp.bind(this)}
             containerStyle={{ marginTop: 10}}
           />
         </View>

@@ -5,6 +5,7 @@ import TitleRight from '../component/titleRight.js';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import fetchData from '../lib/fetchdata.js';
+import Load from "react-native-loading-gif";
 
 var photoOptions = {
   //底部弹出框选项
@@ -51,7 +52,9 @@ export default class Post extends React.Component {
         let formData = new FormData();
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
+        this.refs.Load.OpenLoad();
         fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
+          this.refs.Load.CloseLoad();
           let source = { uri: res.src };
           let avatarSource = this.state.avatarSource;
           avatarSource.push(source);
@@ -71,6 +74,7 @@ export default class Post extends React.Component {
           barStyle="dark-content"
           backgroundColor="#ecf0f1"
         />
+        <Load ref="Load" Image={1}></Load>
         <View style={styles.box}>
           <TextInput
             style={{ height: '50%', borderWidth: 0, fontSize: 20, textAlignVertical: 'top' }}
