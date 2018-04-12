@@ -1,47 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, StatusBar, View, ScrollView } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-import { Button } from 'react-native-elements';
-import fetchData from '../lib/fetchdata.js';
-import { SearchBar, ListItem, Avatar } from 'react-native-elements';
-export default class Main extends React.Component {
+import { SearchBar, ListItem, Avatar, Button } from 'react-native-elements';
+
+export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
+        list: [
         {
-          name: 'Amy Farha',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          subtitle: 'Vice President',
-          isFllow: true
+            name: 'Amy Farha',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
+            subtitle: 'Vice President',
+            isFllow: true
         },
         {
-          name: 'Chris Jackson',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          subtitle: 'Vice Chairman',
-          isFllow: false
+            name: 'Chris Jackson',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
+            subtitle: 'Vice Chairman',
+            isFllow: false
         },
-      ],
+        ],
+      }
     }
-  }
+  static navigationOptions = {
+    title: '我的关注'
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <SearchBar
-          platform="android"
-          showLoading={false}
-          icon={{ type: 'font-awesome', name: 'search',}}
-          placeholder='搜索你想关注的人'
-          inputStyle={{
-            marginLeft: 8
-          }}
-          onSubmitEditing={this.search.bind(this)}
-        />
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
         <ScrollView
           horizontal={false}
           pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
-          style={{borderTopWidth: 0.5}}
         >
         {
           this.state.list.map((item, i) => (
@@ -63,7 +55,7 @@ export default class Main extends React.Component {
                 titleStyle={{ color: '#000',fontSize: 10}}
                 buttonStyle={{
                   width: 60,
-                  backgroundColor: item.isFllow ? '#ffd900' : '#fff',
+                  backgroundColor: item.isFllow ? '#ffd900' : '#fcfcfc',
                   borderColor: '#ccc',
                   borderWidth: 1
                 }}
@@ -73,19 +65,14 @@ export default class Main extends React.Component {
           ))
         }
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
-  }
-  search(event) {
-    this.setState({
-      string: event.nativeEvent.text,
-    })
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-  }
+    flex: 1,
+  },
 });

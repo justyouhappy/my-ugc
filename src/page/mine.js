@@ -36,8 +36,12 @@ export default class Main extends React.Component {
         </ImageBackground>
         <ListItem
           title="我的关注"
+          onPress={() => {
+            this.props.openPage('Fllow');
+          }}
         />
         <ListItem
+          onPress={() => {this.props.changeSigined(false);}}
           title="退出登录"
         />
         <Text style={styles.more}>更多功能敬请期待</Text>

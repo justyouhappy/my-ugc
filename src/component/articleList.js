@@ -10,6 +10,7 @@ export default class Main extends React.Component {
     const {articleList} = this.props
     return (
       <ScrollView 
+        style={styles.container}
         horizontal={false}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
@@ -23,4 +24,7 @@ export default class Main extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ccc'
+  }
 });

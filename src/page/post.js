@@ -48,19 +48,18 @@ export default class Post extends React.Component {
         return
       }
       else {
-        // let formData = new FormData();
-        // let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
-        // formData.append("files",file);
-        // fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData }).then((res) => {
-        //   alert(res.src);
-        // }).catch((err) => {
-        //   console.log(err.message);
-        // });
-        let source = { uri: response.uri };
-        let avatarSource = this.state.avatarSource;
-        avatarSource.push(source);
-        this.setState({
-          avatarSource,
+        let formData = new FormData();
+        let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
+        formData.append("files",file);
+        fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
+          let source = { uri: res.src };
+          let avatarSource = this.state.avatarSource;
+          avatarSource.push(source);
+          this.setState({
+            avatarSource,
+          });
+        }).catch((err) => {
+          alert(err.message);
         });
       }
     });

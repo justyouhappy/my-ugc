@@ -34,6 +34,9 @@ export default class Nav extends React.Component {
   openSigin(cb) {
     this.props.navigation.navigate('Sigin', {changeSigined: this.changeSigined, cb});
   }
+  openPage(page) {
+    this.props.navigation.navigate(page);
+  }
   openMain() {
     if(!this.state.isSigined) {
       this.openSigin(() => {this.setState({ selectedTab: '我的' });});
@@ -42,6 +45,9 @@ export default class Nav extends React.Component {
     }
   }
   changeSigined(isSigined) {
+    if(!isSigined) {
+      this.setState({ selectedTab: 'Main' });
+    }
     this.setState({
       isSigined,
     })
@@ -81,7 +87,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'ios-search' } size={30} color={'#a2a2a2'} />}
                     renderSelectedIcon={() => <Icon name={ 'ios-search' } size={30} color={'#555'} />}
                     onPress={() => this.setState({ selectedTab: 'Search' })}>
-                    <Search />
+                    <Search isSigined={this.state.isSigined} />
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投稿"
@@ -98,7 +104,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'md-person' } size={30} color={'gray'} />}
                     renderSelectedIcon={() => <Icon name={ 'md-person' } size={30} color={'#555'} />}
                     onPress={this.openMain.bind(this)}>
-                    <Mine  isSigined={this.state.isSigined}/>
+                    <Mine openPage={this.openPage.bind(this)} isSigined={this.state.isSigined} changeSigined={this.changeSigined.bind(this)}/>
                 </TabNavigator.Item> 
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'myWrite'}
