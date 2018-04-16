@@ -31,9 +31,7 @@ export default class Post extends React.Component {
           params.cb && params.cb();
         } else {
         }
-      }).catch((res) => {
-          alert('network error');
-      });
+      })
   }
   signUp() {
     this.props.navigation.navigate('SignUp');

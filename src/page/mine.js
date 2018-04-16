@@ -45,8 +45,6 @@ export default class Main extends React.Component {
           },
         })
       }
-    }).catch((res) => {
-      alert('network error');
     })
   }
   loginOut() {
@@ -54,8 +52,6 @@ export default class Main extends React.Component {
       if(res.status === 0) {
         this.props.changeSigined(false);
       }
-    }).catch((res) => {
-      alert('network error');
     })
   }
   componentWillReceiveProps(props) {

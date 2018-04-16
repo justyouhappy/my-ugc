@@ -131,9 +131,8 @@ export default class Nav extends React.Component {
           isSigined: true,
         })
       }
-    }).catch((res) => {
-        alert('network error');
     })
+      
   }
 }
 

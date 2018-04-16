@@ -4,7 +4,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import { Avatar } from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
 import fetchData from '../lib/fetchdata.js';
-
+import config from '../lib/config.js';
 var Dimensions = require('Dimensions');
 var photoOptions = {
     //底部弹出框选项
@@ -50,11 +50,18 @@ export default class Main extends React.Component {
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
         fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
-          this.setState({
-            info: {
-                ...this.state.info,
-                avatarUri: res.src,
-            },
+          fetchData(`http://${config.ip}:${config.port}/updatedUser`, { method: 'post', data: { avatar: res.src }})
+          .then(res => {
+            if(res.status === 0) {
+              this.setState({
+                info: {
+                  ...this.state.info,
+                  avatarUri: res.data.user.avatar,
+                }
+              })
+            } else {
+              alert('更改失败');
+            }
           });
         }).catch((err) => {
           alert(err.message);
@@ -79,11 +86,17 @@ export default class Main extends React.Component {
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
         fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
-          this.setState({
-            info: {
-                ...this.state.info,
-                bg: res.src,
-            },
+          fetchData(`http://${config.ip}:${config.port}/updatedUser`, { method: 'post', data: { bg: res.src }}).then(res => {
+            if(res.status === 0) {
+              this.setState({
+                info: {
+                  ...this.state.info,
+                  bg: res.data.user.bg,
+                }
+              })
+            } else {
+              alert('更改失败');
+            }
           });
         }).catch((err) => {
           alert(err.message);

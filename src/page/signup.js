@@ -10,15 +10,15 @@ var Dimensions = require('Dimensions');
 export default class Post extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      info: {
-        avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
-        nickName: '昵称',
-        sex: '男',
-        birthday: '1995.11.03',
-        bg: 'http://www.yuhuajian.com/img/home-bg.jpg'
-      },
-    };
+    // this.state = {
+    //   info: {
+    //     avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
+    //     nickName: '昵称',
+    //     sex: '男',
+    //     birthday: '1995.11.03',
+    //     bg: 'http://www.yuhuajian.com/img/home-bg.jpg'
+    //   },
+    // };
   }
   static navigationOptions = {
     title: '注册',
@@ -36,8 +36,8 @@ export default class Post extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
-        <AvatarUpdate info={this.state.info}/>
         <View style={styles.box}>
+          <Text h3 style={{textAlign: 'center', marginBottom: 30}}>欢迎来注册</Text>
           <Input
             containerStyle={{
                width: '100%'
@@ -54,10 +54,24 @@ export default class Post extends React.Component {
           />
           <Input
             containerStyle={{
+               width: '100%',
+               marginTop: 10,
+            }}
+            secureTextEntry={true}
+            placeholder='请再次输入密码'
+          />
+          <Input
+            containerStyle={{
+               width: '100%'
+            }}
+            placeholder='输入昵称'
+          />
+          <Input
+            containerStyle={{
               width: '100%',
               marginTop: 10,
             }}
-            placeholder='输入姓名'
+            placeholder='输入真实姓名'
           />
           <Input
             containerStyle={{
@@ -85,7 +99,7 @@ export default class Post extends React.Component {
               borderRadius: 5,
               borderColor: '#2c89dc',
             }}
-            containerStyle={{ marginTop: 10}}
+            containerStyle={{ marginTop: 30}}
           />
         </View>
       </SafeAreaView>
