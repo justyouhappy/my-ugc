@@ -13,7 +13,7 @@ export default class Post extends React.Component {
     this.state = {
       info: {
         avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
-        nackName: '昵称',
+        nickName: '昵称',
         sex: '男',
         birthday: '1995.11.03',
         bg: 'http://www.yuhuajian.com/img/home-bg.jpg'

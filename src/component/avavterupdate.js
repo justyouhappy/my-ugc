@@ -27,7 +27,7 @@ export default class Main extends React.Component {
     this.state = {
         info: {
             avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
-            nackName: '昵称',
+            nickName: '昵称',
             sex: '男',
             birthday: '1995.11.03'
         },
@@ -111,7 +111,7 @@ export default class Main extends React.Component {
             onPress={this.uploadAvatarImage.bind(this)}
             activeOpacity={0.7}
           />
-            <Text style={styles.nackName}>{this.state.info.nackName}</Text>
+            <Text style={styles.nickName}>{this.state.info.nickName}</Text>
             <Text style={styles.font}>{this.state.info.sex + ' '+ this.state.info.birthday}</Text>
         </ImageBackground>
       </TouchableOpacity>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
       },
-      nackName: {
+      nickName: {
         color:'#fff',
         fontSize: 15,
         marginTop: 10,

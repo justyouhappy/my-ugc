@@ -22,7 +22,7 @@ export default class Main extends React.Component {
             />
           </View>
           <View style={styles.headerText}>
-            <Text style={styles.nack}>{detail.nackName}</Text>
+            <Text style={styles.nack}>{detail.nickName}</Text>
             <Text style={styles.time}>{detail.time}</Text>
           </View>
         </View>
