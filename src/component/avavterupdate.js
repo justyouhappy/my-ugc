@@ -96,6 +96,11 @@ export default class Main extends React.Component {
           info: this.props.info
       })
   }
+  componentWillReceiveProps(props) {
+    this.setState({
+        info: props.info
+    })
+  }
   render() {
     return (
       <TouchableOpacity onPress={this.uploadBgImage.bind(this)}>

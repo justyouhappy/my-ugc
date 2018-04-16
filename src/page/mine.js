@@ -11,11 +11,6 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       info: {
-        avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
-        nickName: '昵称',
-        sex: '男',
-        birthday: '1995.11.03',
-        bg: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
       },
     };
   }
@@ -30,34 +25,48 @@ export default class Main extends React.Component {
           }}
         />
         <ListItem
-          onPress={() => {this.props.changeSigined(false);}}
+          onPress={() => {this.loginOut();}}
           title="退出登录"
         />
         <Text style={styles.more}>更多功能敬请期待</Text>
       </View>
     );
   }
+  getUserInfo() {
+    fetchData(`http://${config.ip}:${config.port}/getUserInfo`).then((res) => {
+      if(res.status === 0) {
+        this.setState({
+          info: {
+            avatarUri: res.data.avatar,
+            nickName: res.data.nickname,
+            sex: res.data.sex,
+            birthday: res.data.birthday,
+            bg: res.data.bg,
+          },
+        })
+      }
+    }).catch((res) => {
+      alert('network error');
+    })
+  }
+  loginOut() {
+    fetchData(`http://${config.ip}:${config.port}/loginOut`).then((res) => {
+      if(res.status === 0) {
+        this.props.changeSigined(false);
+      }
+    }).catch((res) => {
+      alert('network error');
+    })
+  }
   componentWillReceiveProps(props) {
     if (props.isSigined) {
-      // fetchData(`http://${config.ip}:3000/`).then((res) => {
-      //   this.setState({
-      //     obj: res,
-      //   })
-      // }).catch((res) => {
-      //   alert(res.message);
-      // })
+      this.getUserInfo();
     }
   }
   componentDidMount() {
-    // if (this.props.isSigined) {
-    //   fetchData(`http://${config.ip}:3000/`).then((res) => {
-    //     this.setState({
-    //       obj: res,
-    //     })
-    //   }).catch((res) => {
-    //     // alert(res.message);
-    //   })
-    // }
+    if (this.props.isSigined) {
+      this.getUserInfo();
+    }
   }
 }
 

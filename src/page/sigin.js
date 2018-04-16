@@ -4,8 +4,8 @@ import TabNavigator from 'react-native-tab-navigator';
 import TitleRight from '../component/titleRight.js';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-
+import fetchData from '../lib/fetchdata.js';
+import config from '../lib/config.js';
 export default class Post extends React.Component {
   static navigationOptions = {
     title: '登录',
@@ -13,11 +13,27 @@ export default class Post extends React.Component {
 
     }
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
   sigin() {
     const { params } = this.props.navigation.state;
-    params.changeSigined(true);
-    this.props.navigation.goBack();
-    params.cb();
+    fetchData(`http://${config.ip}:${config.port}/sigin`, { method: 'post', data: {
+      username: this.state.username, password: this.state.password,
+    }}).then((res) => {
+        if(res.status === 0 ) {
+          params.changeSigined(true);
+          this.props.navigation.goBack();
+          params.cb && params.cb();
+        } else {
+        }
+      }).catch((res) => {
+          alert('network error');
+      });
   }
   signUp() {
     this.props.navigation.navigate('SignUp');
@@ -32,6 +48,8 @@ export default class Post extends React.Component {
             containerStyle={{
               width: '100%'
             }}
+            value={this.state.username}
+            onChangeText={(username) => this.setState({username})}
             leftIcon={
               <Icon
                 name='user'
@@ -44,6 +62,10 @@ export default class Post extends React.Component {
           <Input
             containerStyle={{
               width: '100%'
+            }}
+            value={this.state.password}
+            onChangeText={(password) => {
+              this.setState({password})
             }}
             leftIcon={
               <Icon

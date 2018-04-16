@@ -24,6 +24,12 @@ export default class Main extends React.Component {
       ],
     }
   }
+  gotoSigin() {
+    this.props.openSigin();
+  }
+  changeR() {
+    alert('关注')
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -58,16 +64,16 @@ export default class Main extends React.Component {
                   containerStyle={{marginRight: 10}}
                 />
               }          
-              rightIcon={ <Button
-                onPress={() => {alert(1)}}
+              rightIcon={<Button
+                onPress={() => {!this.props.isSigined ? this.gotoSigin() : this.changeR()}}
                 titleStyle={{ color: '#000',fontSize: 10}}
                 buttonStyle={{
                   width: 60,
-                  backgroundColor: item.isFllow ? '#ffd900' : '#fff',
+                  backgroundColor: item.isFllow && this.props.isSigined ? '#ffd900' : '#fff',
                   borderColor: '#ccc',
                   borderWidth: 1
                 }}
-                title={item.isFllow ? "已关注" :"关注"}
+                title={item.isFllow && this.props.isSigined ? "已关注" :"关注"}
               />}
             />
           ))

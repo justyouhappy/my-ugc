@@ -87,7 +87,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'ios-search' } size={30} color={'#a2a2a2'} />}
                     renderSelectedIcon={() => <Icon name={ 'ios-search' } size={30} color={'#555'} />}
                     onPress={() => this.setState({ selectedTab: 'Search' })}>
-                    <Search isSigined={this.state.isSigined} />
+                    <Search isSigined={this.state.isSigined} openSigin={this.openSigin.bind(this)}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投稿"
@@ -121,14 +121,18 @@ export default class Nav extends React.Component {
     );
   }
   componentDidMount() {
-    fetchData(`http://${config.ip}:3000/`).then((res) => {
-      this.setState({
-        isSigined: false,
-      })
-    }).catch((res) => {
+    fetchData(`http://${config.ip}:${config.port}/`).then((res) => {
+      if(res.msg === '未登录' ) {
         this.setState({
-            isSigined: false,
+          isSigined: false,
         })
+      } else {
+        this.setState({
+          isSigined: true,
+        })
+      }
+    }).catch((res) => {
+        alert('network error');
     })
   }
 }

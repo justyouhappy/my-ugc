@@ -10,8 +10,8 @@ export default function fetchdata(url, config) {
     } else if (config.method === 'POST' || config.method === 'post') {
         fetchConfig = Object.assign(fetchConfig, {
             method: 'POST',
-            hearders: config.headers || {
-                'Content-Type': 'application/json',
+            headers: config.headers || {
+                'content-type': 'application/json',
             },
             body: config.type !== 'form' ? JSON.stringify(config.data) : config.data
         })
