@@ -5,20 +5,23 @@ import TitleRight from '../component/titleRight.js';
 import { Input, Button, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AvatarUpdate from '../component/avavterupdate.js';
+import Toast from 'react-native-root-toast';
+import fetchData from '../lib/fetchdata.js';
+import config from '../lib/config.js';
 var Dimensions = require('Dimensions');
 
 export default class Post extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   info: {
-    //     avatarUri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg",
-    //     nickName: '昵称',
-    //     sex: '男',
-    //     birthday: '1995.11.03',
-    //     bg: 'http://www.yuhuajian.com/img/home-bg.jpg'
-    //   },
-    // };
+    this.state = {
+      username: '',
+      SPass: '',
+      password: '',
+      nickName: '',
+      sex: '',
+      rename: '',
+      birthday: ''
+    };
   }
   static navigationOptions = {
     title: '注册',
@@ -26,11 +29,33 @@ export default class Post extends React.Component {
 
     }
   };
-  sigin() {
-    const { params } = this.props.navigation.state;
-    params.changeSigined(true);
-    this.props.navigation.goBack();
-    params.cb();
+  siginUP() {
+   if(this.state.password !== this.state.SPass) {
+      Toast.show('两次密码不一致', {
+        position: 0,
+      });
+    } else if (!this.state.username || !this.state.SPass || !this.state.password || !this.state.nickName || !this.state.sex || !this.state.rename || !this.state.birthday) {
+      Toast.show('所有项都不能为空哦', {
+        position: 0,
+      });
+    } else {
+      fetchData(`http://${config.ip}:${config.port}/siginUp`, { method: 'post', data: {
+        username: this.state.username,
+        password: this.state.password,
+        nickname: this.state.nickName,
+        birthday: this.state.birthday,
+        rename: this.state.rename,
+        sex: this.state.sex
+      }}).then((res) => {
+          if(res.status === 0 ) {
+            this.props.navigation.goBack();
+          } else {
+            Toast.show(res.msg, {
+              position: 0,
+            });
+          }
+      });
+    }
   }
   render() {
     return (
@@ -42,6 +67,8 @@ export default class Post extends React.Component {
             containerStyle={{
                width: '100%'
             }}
+            value={this.state.username}
+            onChangeText={(username) => this.setState({username})}
             placeholder='输入电话作为用户名'
           />
           <Input
@@ -49,6 +76,8 @@ export default class Post extends React.Component {
                width: '100%',
                marginTop: 10,
             }}
+            value={this.state.password}
+            onChangeText={(password) => this.setState({password})}
             secureTextEntry={true}
             placeholder='输入密码'
           />
@@ -57,6 +86,8 @@ export default class Post extends React.Component {
                width: '100%',
                marginTop: 10,
             }}
+            value={this.state.SPass}
+            onChangeText={(SPass) => this.setState({SPass})}
             secureTextEntry={true}
             placeholder='请再次输入密码'
           />
@@ -64,6 +95,8 @@ export default class Post extends React.Component {
             containerStyle={{
                width: '100%'
             }}
+            value={this.state.nickName}
+            onChangeText={(nickName) => this.setState({nickName})}
             placeholder='输入昵称'
           />
           <Input
@@ -71,6 +104,8 @@ export default class Post extends React.Component {
               width: '100%',
               marginTop: 10,
             }}
+            value={this.state.rename}
+            onChangeText={(rename) => this.setState({rename})}
             placeholder='输入真实姓名'
           />
           <Input
@@ -78,6 +113,8 @@ export default class Post extends React.Component {
               width: '100%',
               marginTop: 10,
             }}
+            value={this.state.sex}
+            onChangeText={(sex) => this.setState({sex})}
             placeholder='输入性别'
           />
           <Input
@@ -85,11 +122,14 @@ export default class Post extends React.Component {
                width: '100%',
               marginTop: 10,
             }}
+            value={this.state.birthday}
+            onChangeText={(birthday) => this.setState({birthday})}
             placeholder='输入出生日期，如1995.11.03'
           />
           <Button
             title="提交"
             loading={false}
+            onPress={this.siginUP.bind(this)}
             titleStyle={{ fontSize: 20, color: '#2c89dc', textAlign: 'center'}}
             clear= {true}
             buttonStyle={{
@@ -113,7 +153,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   box: {
-    height: '50%',
     padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

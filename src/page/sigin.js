@@ -30,8 +30,9 @@ export default class Post extends React.Component {
           this.props.navigation.goBack();
           params.cb && params.cb();
         } else {
+          alert(res.msg);
         }
-      })
+    });
   }
   signUp() {
     this.props.navigation.navigate('SignUp');
