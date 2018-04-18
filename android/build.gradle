@@ -11,7 +11,7 @@ buildscript {
     //     // in the individual module build.gradle files
     // }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.+' // <- USE 2.2.+ version
+        classpath 'com.android.tools.build:gradle:2.2.2' // <- USE 2.2.+ version
     }
 
 }

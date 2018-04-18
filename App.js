@@ -6,8 +6,6 @@ import SignUp from './src/page/signup.js'
 import Fllow from './src/page/fllow.js'
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import config from './src/lib/config.js';
-window.config = config;
 const Navigator = StackNavigator({
     Home: { screen: Nav },
     Post: { screen: Post },

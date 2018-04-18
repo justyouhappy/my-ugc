@@ -87,7 +87,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'ios-search' } size={30} color={'#a2a2a2'} />}
                     renderSelectedIcon={() => <Icon name={ 'ios-search' } size={30} color={'#555'} />}
                     onPress={() => this.setState({ selectedTab: 'Search' })}>
-                    <Search isSigined={this.state.isSigined} openSigin={this.openSigin.bind(this)}/>
+                    <Search isselecte={this.state.selectedTab === 'Search'} isSigined={this.state.isSigined} openSigin={this.openSigin.bind(this)}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投稿"
