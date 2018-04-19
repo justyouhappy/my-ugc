@@ -2,39 +2,56 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import ArticleList from '../component/articleList.js';
+import fetchData from '../lib/fetchdata.js';
+import config from '../lib/config.js';
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        {
-          text: 'Amy Farhahttps://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          images:['https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg'],
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          nickName: '趁着年轻还为了',
-          time: '2017.08.09'
-        },
-        {
-          text: 'Amy Farha',
-          images:['https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg','https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg','https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg'],
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          nickName: '趁着年轻还为了',
-          time: '2017.08.09'
-        },
-        {
-          text: 'Amy Farha',
-          images:['https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg','https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg'],
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg',
-          nickName: '趁着年轻还为了',
-          time: '2017.08.09'
-        },
-      ],
+      list: [],
+      page: 1,
+      hasMore: true,
+      hasMoreText: '加载更多...'
     }
   }
   render() {
     return (
-      <ArticleList articleList={this.state.list}/>
+      <ArticleList articleList={this.state.list} hasMoreText={this.state.hasMoreText}/>
     );
+  }
+  fetchData(page) {
+    if(!this.state.hasMore) {
+      return;
+    }
+    this.setState({
+      hasMoreText: '正在加载...',
+    })
+    fetchData(`http://${config.ip}:${config.port}/getMyArticle`, { method: 'post', data: {
+      page
+    }}).then((res) => {
+        if(res.status === 0 ) {
+          this.setState({
+            list: res.data.Items,
+            page: this.state.page++,
+            hasMore: res.data.hasMore,
+            hasMoreText: res.data.hasMore ? '加载更多...' : '没有了'
+          })
+        } else {
+          alert(res.msg);
+        }
+    });
+  }
+  componentDidMount() {
+    this.fetchData(1);
+  }
+  componentWillReceiveProps(props) {
+    this.setState({
+      page: 1,
+      hasMore: true,
+      hasMoreText: '加载更多...'
+    });
+    this.fetchData(1);
   }
 }
 

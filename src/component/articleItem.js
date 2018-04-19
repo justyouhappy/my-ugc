@@ -26,7 +26,9 @@ export default class Main extends React.Component {
             <Text style={styles.time}>{detail.time}</Text>
           </View>
         </View>
-        <Text style={styles.body}>{detail.text}</Text>
+        <View style={styles.body}>
+          <Text style={styles.bodyText}>{detail.text}</Text>
+        </View>
         <View style={styles.images}>
           {
             detail.images.map((ele, i) => 
@@ -34,11 +36,11 @@ export default class Main extends React.Component {
                 style={{
                   width: (Dimensions.get('window').width - (detail.images.length + 1) * 10) / detail.images.length,
                   height: 150,
-                  backgroundColor: '#313131',
+                  backgroundColor: '#ccc',
                 }}
-                source={{uri: ele}}
+                source={{uri: ele.uri}}
                 key={i}
-                resizeMode="contain"
+                resizeMode="cover"
                 accessible={true}/>
             )
           }
@@ -53,10 +55,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     marginBottom: 10,
+    minHeight: 130,
   },
   images: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   header: {
     flexDirection: 'row',
@@ -77,7 +80,11 @@ const styles = StyleSheet.create({
   body: {
     marginTop: 5,
     marginBottom: 5,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  bodyText: {
     fontSize: 16,
-    color: '#000'
+    color: '#000',
   }
 });

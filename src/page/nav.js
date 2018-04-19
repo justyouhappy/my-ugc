@@ -114,7 +114,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icons name={ 'event-note' } size={30} color={'gray'} />}
                     renderSelectedIcon={() => <Icons name={ 'event-note' } size={30} color={'#555'} />}
                     onPress={this.openmyWrite.bind(this)}>
-                    <MyWrite isSigined={this.state.isSigined} />
+                    <MyWrite isSigined={this.state.isSigined} isselecte={this.state.selectedTab === 'myWrite'}/>
                 </TabNavigator.Item> 
             </TabNavigator>
         </SafeAreaView>

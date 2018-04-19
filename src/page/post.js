@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import fetchData from '../lib/fetchdata.js';
 import Load from "react-native-loading-gif";
-
+import config from '../lib/config.js';
 var photoOptions = {
   //底部弹出框选项
   title:'请选择',
@@ -20,18 +20,20 @@ var photoOptions = {
   storageOptions: {
       skipBackup: true,
       path:'images'
-  }
+  },
+  multiple: true,
 }
+let _this = null;
 export default class Post extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({navigation, screenProps}) => ({
     title: '投稿',
     headerRight: (
-      <TitleRight onClick={() => alert('This is a button!')} title="发表"></TitleRight>
+      <TitleRight onClick={() => navigation.state.params.navigatePress()} title="发表"></TitleRight>
     ),
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', flex: 1 },
     headerStyle: {
-    }
-  };
+    },
+  });
   constructor(props) {
     super(props);
     this.state = { text: '', avatarSource: [] };
@@ -65,6 +67,17 @@ export default class Post extends React.Component {
           alert(err.message);
         });
       }
+    });
+  }
+  post() {
+    fetchData(`http://${config.ip}:${config.port}/createdArticle`, { method: 'post', data: {
+      context: this.state.text, image: this.state.avatarSource
+    }}).then((res) => {
+        if(res.status === 0 ) {
+          this.props.navigation.goBack();
+        } else {
+          alert(res.msg);
+        }
     });
   }
   render() {
@@ -104,6 +117,10 @@ export default class Post extends React.Component {
       </SafeAreaView>
     );
   }
+  componentDidMount(){  
+    //在static中使用this方法  
+    this.props.navigation.setParams({ navigatePress: this.post.bind(this) })  
+} 
 }
 
 const styles = StyleSheet.create({

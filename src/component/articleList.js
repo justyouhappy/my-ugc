@@ -7,7 +7,7 @@ export default class Main extends React.Component {
     super(props);
   }
   render() {
-    const {articleList} = this.props
+    const {articleList, hasMoreText} = this.props
     return (
       <ScrollView 
         style={styles.container}
@@ -18,6 +18,7 @@ export default class Main extends React.Component {
         {articleList && articleList.map((ele, i) => {
             return <ArticleItem key={i} detail={ele}/>
         })}
+        {hasMoreText && <Text style={styles.text}>{hasMoreText}</Text>}
       </ScrollView>
     );
   }
@@ -25,6 +26,9 @@ export default class Main extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ccc'
+    backgroundColor: '#ddd'
+  },
+  text: {
+    textAlign: 'center',
   }
 });
