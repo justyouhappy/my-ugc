@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text, StatusBar, View, Button, TextInput, Image, TouchableOpacity} from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
 import TitleRight from '../component/titleRight.js';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,6 +29,10 @@ export default class Post extends React.Component {
     headerRight: (
       <TitleRight onClick={() => navigation.state.params.navigatePress()} title="发表"></TitleRight>
     ),
+    headerLeft: <Text style={{marginLeft: 10}} onPress={() => {
+      navigation.goBack();
+      navigation.state.params.cb && navigation.state.params.cb();
+    }}>取消</Text>,
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', flex: 1 },
     headerStyle: {
     },
@@ -71,6 +74,10 @@ export default class Post extends React.Component {
   }
   post() {
     const { params } = this.props.navigation.state;
+    if(!this.state.text && this.state.avatarSource.length === 0) {
+      alert('内容不为空');
+      return;
+    }
     fetchData(`http://${config.ip}:${config.port}/createdArticle`, { method: 'post', data: {
       context: this.state.text, image: this.state.avatarSource
     }}).then((res) => {

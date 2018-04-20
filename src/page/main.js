@@ -36,14 +36,18 @@ export default class Main extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Tab></Tab>
+        <Tab
+          screenProps={{
+            gotoSigin: this.props.openSigin,
+            isSigined: this.props.isSigined
+          }}
+        ></Tab>
       </SafeAreaView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
   },
 });

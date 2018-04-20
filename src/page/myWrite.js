@@ -17,11 +17,13 @@ export default class Main extends React.Component {
   }
   render() {
     return (
-      <ArticleList articleList={this.state.list} hasMoreText={this.state.hasMoreText} fetchData={() => this.fetchData(this.page)}/>
+      <ArticleList articleList={this.state.list} isSigin hasMoreText={this.state.hasMoreText} fetchData={(i, cb) => {
+        this.fetchData(i || this.page, cb);
+      }}/>
     );
   }
-  fetchData(page) {
-    if(!this.state.hasMore) {
+  fetchData(page, cb) {
+    if(!this.state.hasMore && page !== 1) {
       return;
     }
     this.setState({
@@ -30,6 +32,7 @@ export default class Main extends React.Component {
     fetchData(`http://${config.ip}:${config.port}/getMyArticle`, { method: 'post', data: {
       page
     }}).then((res) => {
+        cb && cb();
         if(res.status === 0 ) {
           this.setState({
             list: res.data.Items,
@@ -50,8 +53,7 @@ export default class Main extends React.Component {
       page: 1,
       hasMore: true,
       hasMoreText: '加载更多...'
-    });
-    this.fetchData(1);
+    }, () => {props.isselecte && this.fetchData(1);});
   }
 }
 

@@ -22,6 +22,9 @@ export default class Post extends React.Component {
   }
   sigin() {
     const { params } = this.props.navigation.state;
+    if(!this.state.username || !this.state.password) {
+      alert('请填写用户名或密码');
+    }
     fetchData(`http://${config.ip}:${config.port}/sigin`, { method: 'post', data: {
       username: this.state.username, password: this.state.password,
     }}).then((res) => {
