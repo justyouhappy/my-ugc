@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.3.0-rc.0",
     "react-native": "0.54.3",
+    "react-native-android-image-polyfill": "^1.0.0",
     "react-native-elements": "1.0.0-beta3",
     "react-native-image-crop-picker": "^0.20.1",
     "react-native-image-picker": "^0.26.7",

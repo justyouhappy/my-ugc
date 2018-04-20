@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import { Avatar } from 'react-native-elements';
 var Dimensions = require('Dimensions');
+import Image from 'react-native-android-image-polyfill';
 
 export default class Main extends React.Component {
   render() {
@@ -38,7 +39,7 @@ export default class Main extends React.Component {
                   height: 150,
                   backgroundColor: '#ccc',
                 }}
-                source={{uri: ele.uri}}
+                source={{uri: ele.uri + '?imageView2/1/w/250/h/169/interlace/1/q/100', cache: 'force-cache'}}
                 key={i}
                 resizeMode="cover"
                 accessible={true}/>
@@ -52,7 +53,7 @@ export default class Main extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 15,
     backgroundColor: '#fff',
     marginBottom: 10,
     minHeight: 130,

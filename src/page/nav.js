@@ -25,8 +25,9 @@ export default class Nav extends React.Component {
   };
   openPost() {
     // alert(this.props.navigation.state.params.isSigined)
+    this.setState({ selectedTab: 'post' });
     if(this.state.isSigined) {
-      this.props.navigation.navigate('Post');
+      this.props.navigation.navigate('Post', {cb: () => {this.setState({ selectedTab: 'myWrite' });}});
     } else {
       this.openSigin(() => {this.props.navigation.navigate('Post');});
     }
@@ -77,7 +78,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'ios-home' } size={30} color={'#a2a2a2'} />}
                     renderSelectedIcon={() => <Icon name={ 'ios-home' } size={30} color={'#555'} />}
                     onPress={() => this.setState({ selectedTab: 'Main' })}>
-                    <Main/>
+                    <Main isselecte={this.state.selectedTab === 'Main'}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'Search'}
@@ -87,7 +88,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'ios-search' } size={30} color={'#a2a2a2'} />}
                     renderSelectedIcon={() => <Icon name={ 'ios-search' } size={30} color={'#555'} />}
                     onPress={() => this.setState({ selectedTab: 'Search' })}>
-                    <Search isselecte={this.state.selectedTab === 'Search'} isSigined={this.state.isSigined} openSigin={this.openSigin.bind(this)}/>
+                    <Search isselecte={this.state.selectedTab === 'Search'} isSigined={this.state.isSigined} isselecte={this.state.selectedTab === '搜索'} openSigin={this.openSigin.bind(this)}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投稿"
@@ -104,7 +105,7 @@ export default class Nav extends React.Component {
                     renderIcon={() => <Icon name={ 'md-person' } size={30} color={'gray'} />}
                     renderSelectedIcon={() => <Icon name={ 'md-person' } size={30} color={'#555'} />}
                     onPress={this.openMain.bind(this)}>
-                    <Mine openPage={this.openPage.bind(this)} isSigined={this.state.isSigined} changeSigined={this.changeSigined.bind(this)}/>
+                    <Mine openPage={this.openPage.bind(this)}  isselecte={this.state.selectedTab === '我的'} isSigined={this.state.isSigined} changeSigined={this.changeSigined.bind(this)}/>
                 </TabNavigator.Item> 
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'myWrite'}

@@ -13,7 +13,7 @@ var photoOptions = {
   cancelButtonTitle:'取消',
   takePhotoButtonTitle:'拍照',
   chooseFromLibraryButtonTitle:'选择相册',
-  quality: 0.75,
+  quality: 0.1,
   allowsEditing: true,
   noData:false,
   mediaType: 'photo',
@@ -70,11 +70,13 @@ export default class Post extends React.Component {
     });
   }
   post() {
+    const { params } = this.props.navigation.state;
     fetchData(`http://${config.ip}:${config.port}/createdArticle`, { method: 'post', data: {
       context: this.state.text, image: this.state.avatarSource
     }}).then((res) => {
         if(res.status === 0 ) {
           this.props.navigation.goBack();
+          params.cb && params.cb();
         } else {
           alert(res.msg);
         }
@@ -102,7 +104,7 @@ export default class Post extends React.Component {
               this.state.avatarSource.map((ele, i) =>
                 <Image
                   style={{width: 100, height: 100, marginRight: 10}}
-                  source={{uri: ele.uri}}
+                  source={{uri: ele.uri + '?imageView2/1/w/250/h/169/interlace/1/q/100'}}
                   key={i}
                 />)
             }

@@ -71,7 +71,7 @@ export default class Post extends React.Component {
                   small
                   rounded
                   title="MT"
-                  source={{uri: item.avatar_url}}
+                  source={{uri: item.avatar_url + '?imageView2/1/w/250/h/169/interlace/1/q/100'}}
                   containerStyle={{marginRight: 10}}
                 />
               }          

@@ -12,7 +12,7 @@ var photoOptions = {
     cancelButtonTitle:'取消',
     takePhotoButtonTitle:'拍照',
     chooseFromLibraryButtonTitle:'选择相册',
-    quality: 0.75,
+    quality: 0.1,
     allowsEditing: true,
     noData:false,
     mediaType: 'photo',
@@ -119,13 +119,13 @@ export default class Main extends React.Component {
       <TouchableOpacity onPress={this.uploadBgImage.bind(this)}>
         <ImageBackground
           style={styles.imgStyle}
-          source = {{uri: this.state.info.bg}}
+          source = {{uri: this.state.info.bg + '?imageView2/1/w/250/h/169/interlace/1/q/100'}}
           >
           <Avatar
             large
             rounded
             title="MT"
-            source={{uri: this.state.info.avatarUri}}
+            source={{uri: this.state.info.avatarUri + '?imageView2/1/w/250/h/169/interlace/1/q/100'}}
             onPress={this.uploadAvatarImage.bind(this)}
             activeOpacity={0.7}
           />

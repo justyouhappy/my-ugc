@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import fetchData from '../lib/fetchdata.js';
 import config from '../lib/config.js';

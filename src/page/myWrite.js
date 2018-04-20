@@ -17,7 +17,7 @@ export default class Main extends React.Component {
   }
   render() {
     return (
-      <ArticleList articleList={this.state.list} hasMoreText={this.state.hasMoreText}/>
+      <ArticleList articleList={this.state.list} hasMoreText={this.state.hasMoreText} fetchData={() => this.fetchData(this.page)}/>
     );
   }
   fetchData(page) {
