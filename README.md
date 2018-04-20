@@ -6,7 +6,8 @@
 
 ```
 npm install
-react native
+react native run-android //安卓
+react native run-ios //ios
 
 ```
 ### todo: 将服务端代码部署服务器，摆脱端口依赖
