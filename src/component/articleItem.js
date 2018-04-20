@@ -41,7 +41,7 @@ export default class Main extends React.Component {
                 }}
                 source={{uri: ele.uri + '?imageView2/1/w/250/h/169/interlace/1/q/100', cache: 'force-cache'}}
                 key={i}
-                resizeMode="cover"
+                resizeMode="contain"
                 accessible={true}/>
             )
           }
