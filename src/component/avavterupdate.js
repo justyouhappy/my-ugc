@@ -12,7 +12,7 @@ var photoOptions = {
     cancelButtonTitle:'取消',
     takePhotoButtonTitle:'拍照',
     chooseFromLibraryButtonTitle:'选择相册',
-    quality: 0.1,
+    quality: 0.4,
     allowsEditing: true,
     noData:false,
     mediaType: 'photo',
