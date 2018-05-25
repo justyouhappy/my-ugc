@@ -18,11 +18,11 @@ export default class Main extends React.Component {
   render() {
     return (
       <ArticleList articleList={this.state.list} isSigin={this.props.screenProps.isSigined} hasMoreText={this.state.hasMoreText} gotoSigin={this.props.screenProps.gotoSigin} fetchData={(i, cb) => {
-        this.fetchData(i || this.page, cb);
+        this.fetchDatas(i || this.page, cb);
       }}/>
     );
   }
-  fetchData(page, cb) {
+  fetchDatas(page, cb) {
     if(!this.state.hasMore && page !== 1) {
       return;
     }
@@ -46,14 +46,14 @@ export default class Main extends React.Component {
     });
   }
   componentDidMount() {
-    this.fetchData(1);
+    this.fetchDatas(1); 
   }
   componentWillReceiveProps(props) {
     this.setState({
       page: 1,
       hasMore: true,
       hasMoreText: '加载更多...'
-    }, () => {props.isselecte && this.fetchData(1);});
+    }, () => {props.isselecte && this.fetchDatas(1);});
   }
 }
 

@@ -49,7 +49,7 @@ export default class Main extends React.Component {
         let formData = new FormData();
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
-        fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
+        fetchData('https://cdn.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
           fetchData(`http://${config.ip}:${config.port}/updatedUser`, { method: 'post', data: { avatar: res.src }})
           .then(res => {
             if(res.status === 0) {
@@ -85,7 +85,7 @@ export default class Main extends React.Component {
         let formData = new FormData();
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
-        fetchData('http://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
+        fetchData('https://cdn.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
           fetchData(`http://${config.ip}:${config.port}/updatedUser`, { method: 'post', data: { bg: res.src }}).then(res => {
             if(res.status === 0) {
               this.setState({
