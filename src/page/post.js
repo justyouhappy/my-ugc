@@ -58,7 +58,7 @@ export default class Post extends React.Component {
         let file = {uri: response.uri, type: 'multipart/form-data', name: 'image.png'}; 
         formData.append("files",file);
         this.refs.Load.OpenLoad();
-        fetchData('https://cdn.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
+        fetchData('https://nami.mdzzapp.com/upload/file', { method: 'post', headers:{ 'Content-Type':'multipart/form-data'}, data: formData, type: 'form' }).then((res) => {
           this.refs.Load.CloseLoad();
           let source = { uri: res.src };
           let avatarSource = this.state.avatarSource;
